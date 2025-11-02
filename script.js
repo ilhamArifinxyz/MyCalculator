@@ -6,12 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let previousInput = '';
     let operator = null;
 
-    // Fungsi untuk mengupdate layar
     function updateDisplay() {
         display.value = currentInput;
     }
 
-    // Fungsi untuk menangani input angka dan titik
     function handleNumber(value) {
         if (value === '.' && currentInput.includes('.')) return;
         if (currentInput === '0' && value !== '.') {
@@ -21,17 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fungsi untuk menangani operator
     function handleOperator(value) {
         if (operator !== null && previousInput !== '') {
-            calculate(); // Hitung dulu jika ada operasi tertunda
+            calculate();
         }
         previousInput = currentInput;
         operator = value;
-        currentInput = '0'; // Siapkan untuk input angka berikutnya
+        currentInput = '0';
     }
 
-    // Fungsi untuk menghitung
     function calculate() {
         if (operator === null || previousInput === '') return;
 
@@ -66,14 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         previousInput = '';
     }
 
-    // Fungsi untuk 'Clear' (C)
     function handleClear() {
         currentInput = '0';
         previousInput = '';
         operator = null;
     }
 
-    // Fungsi untuk 'Delete' (DEL)
     function handleDelete() {
         currentInput = currentInput.slice(0, -1);
         if (currentInput === '') {
@@ -81,12 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fungsi untuk persen (%)
     function handlePercent() {
         currentInput = (parseFloat(currentInput) / 100).toString();
     }
 
-    // Event listener utama untuk semua tombol
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const value = button.dataset.value;
@@ -110,6 +102,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Inisialisasi layar
     updateDisplay();
 });
